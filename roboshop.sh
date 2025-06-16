@@ -9,9 +9,9 @@ DOMAIN_NAME="daws84s.online"
 for instance in "${INSTANCES[@]}"
 do
   INSTANCE_ID=$(aws ec2 run-instances \
-    --image-id "$AMI_ID" \
+    --image-id "ami-09c813fb715477c4f" \
     --instance-type t3.micro \
-    --security-group-ids "$SG_ID" \
+    --security-group-ids "sg-02beb32ed88e88ebf" \
     --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$instance}]" \
     --query 'Instances[0].InstanceId' \
     --output text)
