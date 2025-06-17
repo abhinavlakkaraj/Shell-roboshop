@@ -1,7 +1,7 @@
 #!/bin/bash
 
 AMI_ID="ami-09c813fb71547fc4f"
-SG_ID="sg-02beb32ed88eb95cf"
+SG_ID="sg-02beb32ed3e88e9bf"
 INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "dispatch" "frontend")
 ZONE_ID="Z03666236DN6S5ZBYZCYL"
 DOMAIN_NAME="daws84s.online"
@@ -10,9 +10,9 @@ for instance in "${INSTANCES[@]}"
 do
   # Launch EC2 Instance
   INSTANCE_ID=$(aws ec2 run-instances \
-    --image-id $AMI_ID \
+    --image-id ami-09c813fb71547fc4f \
     --instance-type t3.micro \
-    --security-group-ids $SG_ID \
+    --security-group-ids sg-02beb32ed3e88e9bf \
     --query "Instances[0].InstanceId" \
     --output text)
 
