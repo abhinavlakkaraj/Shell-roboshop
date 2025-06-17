@@ -10,7 +10,7 @@ for instance in "${INSTANCES[@]}"
 do
   # Launch EC2 Instance
   INSTANCE_ID=$(aws ec2 run-instances \
-    --image-id ami-09c813fb71547fc4f \
+    --image-id "ami-09c813fb71547fc4f"\
     --instance-type t3.micro \
     --security-group-ids sg-02beb32ed3e88e9bf \
     --query "Instances[0].InstanceId" \
