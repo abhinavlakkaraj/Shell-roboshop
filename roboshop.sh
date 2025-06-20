@@ -3,7 +3,7 @@
 AMI_ID="ami-09c813fb71547fc4f"
 SG_ID="sg-02beb32ed3e88e9bf"
 INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "dispatch" "frontend")
-ZONE_ID="Z03666236DN6S5ZBYZCYL"
+ZONE_ID="Z0366236DN65Z5Z8YCIL"
 DOMAIN_NAME="daws84s.online"
  
  for instance in "${INSTANCES[@]}"
@@ -27,7 +27,7 @@ DOMAIN_NAME="daws84s.online"
         ,"Changes": [{
         "Action"              : "UPSERT"
         ,"ResourceRecordSet"  : {
-            "Name"              : "'$RECORD_NAME'"
+            "Name"              : "'$instance'.'$DOMAIN_NAME'"
             ,"Type"             : "A"
             ,"TTL"              : 1
             ,"ResourceRecords"  : [{
