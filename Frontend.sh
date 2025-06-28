@@ -40,27 +40,27 @@ dnf module enable nginx:1.24 -y &>>$LOG_FILE
 VALIADTE $? "Enabling Nginx:1.24"
 
 dnf install nginx -y &>>$LOG_FILE
-VALIADTE $? "Installing Nginx"
+VALIDATE $? "Installing Nginx"
 
 systemctl enable nginx &>>$LOG_FILE
 systemctl start nginx
-VALIADTE $? "Starting Nginx"
+VALIDATE $? "Starting Nginx"
 
 rm -rf /usr/share/nginx/html/* &>>$LOG_FILE
-VALIADTE $? "Removing default content"
+VALIDATE $? "Removing default content"
 
 curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip &>>$LOG_FILE
-VALIADTE $? "Downloading frontend"
+VALIDATE $? "Downloading frontend"
 
 cd /usr/share/nginx/html 
 unzip /tmp/frontend.zip &>>$LOG_FILE
-VALIADTE $? "unzipping frontend"
+VALIDATE $? "unzipping frontend"
 
 rm -rf /etc/nginx/nginx.conf &>>$LOG_FILE
-VALIADTE $? "Remove default nginx conf"
+VALIDATE $? "Remove default nginx conf"
 
 cp $SCRIPT_DIR/nginx.conf /etc/nginx/nginx.conf
-VALIADTE $? "Copying nginx.conf"
+VALIDATE $? "Copying nginx.conf"
 
 systemctl restart nginx
-VALIADTE $? "Restarting nginx"
+VALIDATE $? "Restarting nginx"
