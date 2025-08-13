@@ -31,8 +31,7 @@ VALIDATE(){
     fi
 }
 
-cp mongo.repo /etc/yum.repos.d/mongo.repo | tee -a $LOG_FILE
-VALIDATE $? "copying repo data" 
+cp mongo.repo /etc/yum.repos.d/mongo.repo | tee -a $LOG_FILE 
 VALIDATE $? "copying repo data" | tee -a $LOG_FILE
 VALIDATE $? "Copying MongoDB repo"
 
