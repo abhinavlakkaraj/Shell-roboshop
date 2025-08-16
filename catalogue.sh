@@ -1,4 +1,4 @@
-a#!/bin/bash
+#!/bin/bash
 
 USERID=$(id -u)
 R="\e[31m"
