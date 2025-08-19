@@ -67,18 +67,19 @@ mv target/shipping-1.0.jar shipping.jar  &>>$LOG_FILE
 VALIDATE $? "Moving and renaming Jar file"
 
 cp $SCRIPT_DIR/shipping/shipping.service /etc/systemd/system/shipping.service
+VALIDATE $? "Copying shipping.service"
 
-systemctl daemon-reload &>>$LOG_FILE
-VALIDATE $? "Daemon Realod"
+# Reload systemd to pick up new service
+systemctl daemon-reload
+VALIDATE $? "Daemon Reload"
 
-systemctl enable shipping  &>>$LOG_FILE
+# Enable shipping service to start on boot
+systemctl enable shipping
 VALIDATE $? "Enabling Shipping"
 
-systemctl start shipping &>>$LOG_FILE
+# Start shipping service now
+systemctl start shipping
 VALIDATE $? "Starting Shipping"
-
-dnf install mysql -y  &>>$LOG_FILE
-VALIDATE $? "Install MySQL"
 
 mysql -h mysql.daws84s.online -u root -p$MYSQL_ROOT_PASSWORD -e 'use cities' &>>$LOG_FILE
 if [ $? -ne 0 ]
@@ -98,3 +99,35 @@ END_TIME=$(date +%s)
 TOTAL_TIME=$(( $END_TIME - $START_TIME ))
 
 echo -e "Script exection completed successfully, $Y time taken: $TOTAL_TIME seconds $N" | tee -a $LOG_FILE
+
+
+# Copy shipping.service to systemd
+cp $SCRIPT_DIR/shipping/shipping.service /etc/systemd/system/shipping.service
+VALIDATE $? "Copying shipping.service"
+
+# Reload systemd to pick up new service
+systemctl daemon-reload
+VALIDATE $? "Daemon Reload"
+
+# Enable shipping service to start on boot
+systemctl enable shipping
+VALIDATE $? "Enabling Shipping"
+
+# Start shipping service now
+systemctl start shipping
+VALIDATE $? "Starting Shipping"
+
+
+cp $SCRIPT_DIR/shipping/shipping.service /etc/systemd/system/shipping.service
+
+systemctl daemon-reload &>>$LOG_FILE
+VALIDATE $? "Daemon Realod"
+
+systemctl enable shipping  &>>$LOG_FILE
+VALIDATE $? "Enabling Shipping"
+
+systemctl start shipping &>>$LOG_FILE
+VALIDATE $? "Starting Shipping"
+
+dnf install mysql -y  &>>$LOG_FILE
+VALIDATE $? "Install MySQL"
