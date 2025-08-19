@@ -67,19 +67,18 @@ mv target/shipping-1.0.jar shipping.jar  &>>$LOG_FILE
 VALIDATE $? "Moving and renaming Jar file"
 
 cp $SCRIPT_DIR/shipping/shipping.service /etc/systemd/system/shipping.service
-VALIDATE $? "Copying shipping.service"
 
-# Reload systemd to pick up new service
-systemctl daemon-reload
-VALIDATE $? "Daemon Reload"
+systemctl daemon-reload &>>$LOG_FILE
+VALIDATE $? "Daemon Realod"
 
-# Enable shipping service to start on boot
-systemctl enable shipping
+systemctl enable shipping  &>>$LOG_FILE
 VALIDATE $? "Enabling Shipping"
 
-# Start shipping service now
-systemctl start shipping
+systemctl start shipping &>>$LOG_FILE
 VALIDATE $? "Starting Shipping"
+
+dnf install mysql -y  &>>$LOG_FILE
+VALIDATE $? "Install MySQL"
 
 mysql -h mysql.daws84s.online -u root -p$MYSQL_ROOT_PASSWORD -e 'use cities' &>>$LOG_FILE
 if [ $? -ne 0 ]
