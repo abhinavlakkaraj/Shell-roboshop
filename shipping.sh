@@ -66,7 +66,7 @@ VALIDATE $? "Packaging the shipping application"
 mv target/shipping-1.0.jar shipping.jar  &>>$LOG_FILE
 VALIDATE $? "Moving and renaming Jar file"
 
-cp $SCRIPT_DIR/shipping.service /etc/systemd/system/shipping.service
+cp $SCRIPT_DIR/shipping/shipping.service /etc/systemd/system/shipping.service
 
 systemctl daemon-reload &>>$LOG_FILE
 VALIDATE $? "Daemon Realod"
